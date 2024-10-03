@@ -21,22 +21,6 @@ void blink_led(int num_times){
 #define CLK_PIN 14
 #define DATA_PIN 13
 #define LATCH_PIN 15
-#define ONE      0b0000000000000001
-#define TWO      0b0000000000000011
-#define THREE    0b0000000000000111
-#define FOUR     0b0000000000001111
-#define FIVE     0b0000000000011111
-#define SIX      0b0000000000111111
-#define SEVEN    0b0000000001111111
-#define EIGHT    0b0000000011111111
-#define NINE     0b0000000111111111
-#define TEN      0b0000001111111111
-#define ELEVEN   0b0000011111111111
-#define TWELVE   0b0000111111111111
-#define THIRTEEN 0b0001111111111111
-#define FOURTEEN 0b0011111111111111
-#define FIFTEEN  0b0111111111111111
-#define SIXTEEN  0b1111111111111111
 
 uint16_t tempLights[] = {
     0b0000000000000001,
@@ -89,19 +73,19 @@ void reset_leds(){
 }
 
 void process_farenheit(float temp_f){
-    reset_leds();
     lcd_clear();
     char str[16];
 
     double rounded = round(temp_f);
+    double result = rounded / 6;
+    int resultInt = (int)result;
     sprintf(str, "%.2f", rounded);
     lcd_home();
     char temp[] = "Temp: ";
     strcat(temp, str);
     strcat(temp, " F");
     lcd_print(temp);
-    double result = rounded / 6;
-    int resultInt = (int)result;
+    reset_leds();
     writeTo595(tempLights[resultInt]);
 
     return;
@@ -116,7 +100,7 @@ void process_pressure(float pressure){
     
     char str[16];
     double rounded = round(atmosphericPressure);
-    sprintf(str, "%.4f", rounded);
+    sprintf(str, "%.2f", atmosphericPressure);
     lcd_setCursor(1,0);
     lcd_print("                ");
     char pres[] = "ATM: ";

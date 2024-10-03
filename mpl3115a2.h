@@ -197,10 +197,10 @@ void sensor_init(bool barometer_mode)
 
     gpio_set_irq_enabled_with_callback(INT1_PIN, GPIO_IRQ_LEVEL_LOW, true, &gpio_callback);
     
-    gpio_init(READ_PIN);
-    gpio_set_dir(READ_PIN, GPIO_OUT); 
+    // gpio_init(READ_PIN);
+    // gpio_set_dir(READ_PIN, GPIO_OUT); 
 
-    gpio_put(READ_PIN, read_pin_state);
+    // gpio_put(READ_PIN, read_pin_state);
 }
 
 float tsum = 0, hsum = 0;

@@ -118,7 +118,7 @@ void lcd_print(const char *s) {
     while (*s) {
         lcd_write(*s++);
     }
-    sleep_ms(500);
+    sleep_ms(150);
 }
 
 void lcd_createChar(uint8_t location, uint8_t charmap[]) {
